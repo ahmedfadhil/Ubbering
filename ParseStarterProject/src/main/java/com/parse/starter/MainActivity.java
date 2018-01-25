@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
     public void redirectUser() {
@@ -70,12 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
             Intent i = new Intent(getApplicationContext(), YourLocation.class);
             startActivity(i);
-
         } else {
-
             Intent i = new Intent(getApplicationContext(), ViewRequests.class);
             startActivity(i);
-
         }
 
     }
@@ -115,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
-
 
 
     }

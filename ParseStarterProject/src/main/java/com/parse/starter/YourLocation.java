@@ -123,23 +123,27 @@ public class YourLocation extends FragmentActivity implements LocationListener {
 
         Location location = locationManager.getLastKnownLocation(provider);
 
+//        if (location != null) {
+//
+//
+//            updateLocation(location);
+//
+//        }
         if (location != null) {
-
-
             updateLocation(location);
-
         }
 
 
     }
 
+
     public void updateLocation(Location location) {
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
-
+        mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
         mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Location"));
-
+        ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
         if (requestActive == true) {
+
 
             final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
 
@@ -169,11 +173,53 @@ public class YourLocation extends FragmentActivity implements LocationListener {
 
                 }
             });
-
-
         }
 
+
     }
+
+
+//    public void updateLocation(Location location) {
+//
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
+//
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Location"));
+//
+//        if (requestActive == true) {
+//
+//            final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+//
+//            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Requests");
+//
+//            query.whereEqualTo("requesterUsername", ParseUser.getCurrentUser().getUsername());
+//
+//            query.findInBackground(new FindCallback<ParseObject>() {
+//                @Override
+//                public void done(List<ParseObject> objects, ParseException e) {
+//
+//                    if (e == null) {
+//
+//                        if (objects.size() > 0) {
+//
+//                            for (ParseObject object : objects) {
+//
+//                                object.put("requesterLocation", userLocation);
+//                                object.saveInBackground();
+//
+//                            }
+//
+//
+//                        }
+//
+//                    }
+//
+//                }
+//            });
+//
+//
+//        }
+//
+//    }
 
     @Override
     protected void onResume() {
@@ -233,43 +279,8 @@ public class YourLocation extends FragmentActivity implements LocationListener {
     public void onLocationChanged(Location location) {
 
         mMap.clear();
-        mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Location"));
-        ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-        if (requestActive == true) {
 
-
-            final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Requests");
-
-            query.whereEqualTo("requesterUsername", ParseUser.getCurrentUser().getUsername());
-
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-
-                    if (e == null) {
-
-                        if (objects.size() > 0) {
-
-                            for (ParseObject object : objects) {
-
-                                object.put("requesterLocation", userLocation);
-                                object.saveInBackground();
-
-                            }
-
-
-                        }
-
-                    }
-
-                }
-            });
-        }
-
-//        updateLocation(location);
+        updateLocation(location);
 
 
     }
