@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-3deed844baa554ecc10079fb60f0e798f89adea5.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-0b4a845e1ce3e5b4b0f0de8fe5ba97d20bd8ae64.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-2eab8f58e11a8511900d4a1d2b202d3d2683fcfb.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-896c2e4ef6fccbb15c9c1d4e4b8d6c0ca35c8002.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-e9b658d5b860bf89c0ba5e96e6dd48981aed00a4.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-656c05956aff254f6d10aaaf4560723557e2b868.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-bf9ce0c0010284d97c1129b61cf14cfd09b68b5e.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-9a146b1c2d8f19ccce6ed4783f585cc4ba1ed3e1.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-0d90a214291be563a7ad444c2b86d81707196325.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-1c0c5bf317d84113f988babe5302ee3e650b10f0.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-63c4189faecef5adbf0d00e4d986a6ce7e8f3356.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-06b30f762e735cb1402313eab830119520bb44c1.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-535692decf82c474a431c8a7d7cccdcb7f242564.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-2badb71b13ab3fa35886b6411c24555fc371e241.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-e7a9d01cdf1252a9c55f49afc21d11ed0e160085.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-629742592616964262131104e3f6440ff2af1d83.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-8bf88095de5dffd907cf0b0b65d7690d3054a20e.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-e1ac292fe538d6a83d20b6a28d50f04b104b2f84.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-10e811674bc0252bf472a4589ea8b67941ccfe36.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-37150632855d092d88a9aca0dac0978901d16d0f.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-05424b19ab7d6e3760f000dd0dcbd55fda87ed04.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.1/44780c2cf98f6a3cf4e77f1234d644758b329201/bolts-android-1.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="44780c2cf98f6a3cf4e77f1234d644758b329201">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/bolts-android-1.2.1-fa0831e5b343eb15ad3cda83d7622d1c889efe73.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-12136e4ac0588f6448b350b6e8e6a8f7bab4b875.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-9eba8a9a432a64b752a0328105ae42b006d0de93.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-3eeb6b144c24d7e9b5cf0af200c98c4c7e071056.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/.gradle/caches/modules-2/files-2.1/com.parse/parse-android/1.10.1/a87cb993a12e574a216213d0b8b2b78f6da35d37/parse-android-1.10.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a87cb993a12e574a216213d0b8b2b78f6da35d37">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/parse-android-1.10.1-26543f76df1c9b81c5a79aabae75c27cbaaf88a5.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-d04fc9d0b6ab1b7fd79554adc8c9f880a3d79b8f.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/Uber/ParseStarterProject/build/intermediates/pre-dexed/debug/classes-505f4a7cadd2d95764ca6d6cae0897473accd1ac.jar" />
+    </item>
+
+</items>
