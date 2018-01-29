@@ -1,10 +1,10 @@
 package com.parse.starter;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
@@ -19,9 +19,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -35,7 +33,7 @@ public class ViewRiderLocation extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     Intent i;
 
-    public  void back(View view) {
+    public void back(View view) {
 
         Intent intent = new Intent(getApplicationContext(), ViewRequests.class);
         startActivity(intent);
@@ -76,7 +74,6 @@ public class ViewRiderLocation extends FragmentActivity {
                             });
 
 
-
                         }
 
 
@@ -95,11 +92,11 @@ public class ViewRiderLocation extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rider_location);
 
-        i = getIntent();
 
+        i = getIntent();
         setUpMapIfNeeded();
 
-        RelativeLayout mapLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
+        RelativeLayout mapLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
 
         mapLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -124,7 +121,6 @@ public class ViewRiderLocation extends FragmentActivity {
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
                 mMap.animateCamera(cu);
-
 
 
             }
@@ -174,7 +170,9 @@ public class ViewRiderLocation extends FragmentActivity {
      */
     private void setUpMap() {
 
-
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()), 10));
+        mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0), location.getLongitude()), 10));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0))).title("Rider Location"));
 
 
     }

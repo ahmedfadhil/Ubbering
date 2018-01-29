@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -43,6 +44,11 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
 
     ListView listView;
     ArrayList<String> listViewContent;
+    ArrayList<String> usernames;
+    ArrayList<Float> latitudes;
+    ArrayList<Float> longitudes;
+
+
     ArrayAdapter arrayAdapter;
     LocationManager locationManager;
     String provider;
@@ -57,76 +63,70 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
         listViewContent.add("Finding near by requests...");
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listViewContent);
         listView.setAdapter(arrayAdapter);
+        usernames = new ArrayList<String>();
+        latitudes = new ArrayList<Double>();
+        longitudes = new ArrayList<Double>();
+
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         locationManager.requestLocationUpdates(provider, 400, 1, this);
         Location location = locationManager.getLastKnownLocation(provider);
         if (location != null) {
+
             updateLocation(location);
         }
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent i = new Intent(getApplicationContext(), vieRiderLocation.class);
+                i.putExtra("position", usernames.get(position));
+                i.putExtra("latitude", latitudes.get(position));
+                i.putExtra("longitude", longitudes.get(position));
+                startActivity(i);
+//                Log.i("MyApp", usernames.get(position) + latitudes.get(position).toString() + longitudes.get(position).toString());
 
-//        listView = (ListView) findViewById(R.id.listView);
-//        listViewContent = new ArrayList<String>();
-//        usernames = new ArrayList<String>();
-//        latitudes = new ArrayList<Double>();
-//        longitudes = new ArrayList<Double>();
-//
-//        listViewContent.add("Finding nearby requests...");
-//
-//        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listViewContent);
-//
-//        listView.setAdapter(arrayAdapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Intent i = new Intent(getApplicationContext(), ViewRiderLocation.class);
-//                i.putExtra("username", usernames.get(position));
-//                i.putExtra("latitude", latitudes.get(position));
-//                i.putExtra("longitude", longitudes.get(position));
-//                i.putExtra("userLatitude", location.getLatitude());
-//                i.putExtra("userLongitude", location.getLongitude());
-//                startActivity(i);
-//
-//            }
-//        });
-//
-//
-//        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        provider = locationManager.getBestProvider(new Criteria(), false);
-//
-//        locationManager.requestLocationUpdates(provider, 400, 1, this);
-//
-//        location = locationManager.getLastKnownLocation(provider);
-//
-//        if (location != null) {
-//
-//
-//            updateLocation();
-//
-//        }
+
+            }
+        });
 
 
     }
 
-    public void updateLocation(Location location) {
+    public void updateLocation(final Location location) {
 
-        ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude())
+        final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Requests");
         query.whereNear("requesterLocation", userLocation);
-        query.whereDoesNotExist("diverUsername");
-        query.setLimit(10);
+//        query.whereDoesNotExist("diverUsername");
+        query.setLimit(100);
         query.findInBackground(new FindCallBack<ParseObject>() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
 
                 if (e == null) {
                     if (objects.size() > 0) {
                         listViewContent.clear();
+//                        requests.clear();
+                        usernames.clear();
+                        latitudes.clear();
+                        longitudes.clear();
+
                         for (ParseObject object : objects) {
-                            listViewContent.add(String.valueOf(object.get("requesterUsername")));
+                            if (object.get("driverUsername") == null) {
+
+                                double distanceInMiles = userLocation.distanceInMilesTo((ParseGeoPoint) object.get("requesterLocation"));
+                                double distanceOneDP = (double) Math.round((distanceInMiles * 100) * 10) / 10;
+                                listViewContent.add(distanceOneDP.toString() + " miles");
+//                                requests.add(object);
+                                usernames.add(object.getString("requesterUsername"));
+                                latitudes.add(object.getParseGeoPoint("requesterLocation").getLatitude());
+                                longitudes.add(object.getParseGeoPoint("requesterLocation").getLongitude());
+
+
+                            }
                         }
                         arrayAdapter.notifyDataSetChanged();
                     }
