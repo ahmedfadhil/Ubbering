@@ -1,10 +1,13 @@
 package com.parse.starter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +29,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class YourLocation extends FragmentActivity implements LocationListener {
@@ -34,19 +38,23 @@ public class YourLocation extends FragmentActivity implements LocationListener {
 
     LocationManager locationManager;
     String provider;
+    ParseGeoPoint driverLocation = new ParseGeoPoint(0, 0);
+
+    Handler handler = new Handler();
 
     TextView infoTextView;
     Button requestUberButton;
 
     Boolean requestActive = false;
+    String driverUsername = "";
 
     public void requestUber(View view) {
 
         if (requestActive == false) {
 
-            Log.i("MyApp", "Uber requesed");
+//            Log.i("MyApp", "Uber requesed");
 
-            ParseObject request = new ParseObject("Requests");
+            final ParseObject request = new ParseObject("Requests");
 
             request.put("requesterUsername", ParseUser.getCurrentUser().getUsername());
 
@@ -61,9 +69,27 @@ public class YourLocation extends FragmentActivity implements LocationListener {
 
                     if (e == null) {
 
-                        infoTextView.setText("Finding Uber driver...");
-                        requestUberButton.setText("Cancel Uber");
-                        requestActive = true;
+                        if (objects.size() > 0) {
+
+                            for (ParseObject object : objects) {
+
+                                requestActive = true;
+                                infoTextView.setText("Finding Uber Driver...");
+                                requestUberButton.setText("Uber Cancelled.");
+                                if (object.get("driverUsername") != null) {
+                                    driverUsername = object.getString("driverUsername");
+                                    infoTextView.setText("Your driver is on their way");
+                                    requestUberButton.setVisibility(View.INVISIBLE);
+
+                                    Log.i("AppInfo", driverUsername);
+                                }
+
+//                                object.deleteInBackground();
+
+                            }
+
+
+                        }
 
                     }
 
@@ -137,13 +163,92 @@ public class YourLocation extends FragmentActivity implements LocationListener {
     }
 
 
-    public void updateLocation(Location location) {
+    public void updateLocation(final Location location) {
 
-        mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Location"));
+
+        mMap.clear();
+
+        if (requestActive == false) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Requests");
+            query.whereEqualTo("requesterUsername", ParseUser.getCurrentUser().getUsername());
+
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+
+                    if (e == null) {
+
+                        if (objects.size() > 0) {
+
+                            for (ParseObject object : objects) {
+
+                                object.put("requesterLocation", userLocation);
+                                object.saveInBackground();
+
+                            }
+
+
+                        }
+
+                    }
+
+                }
+            });
+
+
+        }
+
+        if (driverUsername.equals("")) {
+            mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 10));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Location"));
+
+        }
         ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
         if (requestActive == true) {
 
+
+            if (!driverUsername.equals("")) {
+                ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+                userQuery.whereEqualTo("username", driverUsername);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+
+                        if (e == null) {
+
+                            if (objects.size() > 0) {
+
+                                for (ParseObject object : objects) {
+                                    driverLocation = driver.getParseGeoPoint("location");
+//                                    object.put("requesterLocation", userLocation);
+//                                    object.saveInBackground();
+//
+
+                                }
+
+
+                            }
+
+                        }
+
+                    }
+                });
+
+                if (driverLocation.getLatitude() != 0 && driverLocation.getLongitude() != 0) {
+                    Log.i("AppInfo", driverLocation.toString());
+
+                    double distanceInMiles = driverLocation.distanceInMilesTo(new ParseGeoPoint(location.getLatitude(), location.getLongitude()));
+                    double distanceOneDP = (double) Math.round((distanceInMiles * 100) * 10) / 10;
+
+                    infoTextView.setText("Your driver is " + distanceOneDP.toString() + "miles away");
+
+                    LatLngBounds.Builder builder = new LatLingBounds.Builder();
+                    ArrayList<Marker> markers = new ArrayList<Marker>();
+                    markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(driverLocation.getLatitude(), driverLocation.getLongtitude())).icon(BitmapFactory.defaultMarker(BitmapDescriptionFactory.HUE_BLUE))));
+                    markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongtitude())).icon(BitmapFactory.defaultMarker(BitmapDescriptionFactory.HUE_BLUE))));
+                }
+
+            }
 
             final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
 
@@ -174,6 +279,12 @@ public class YourLocation extends FragmentActivity implements LocationListener {
                 }
             });
         }
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateLocation(location);
+            }
+        }, 2000);
 
 
     }

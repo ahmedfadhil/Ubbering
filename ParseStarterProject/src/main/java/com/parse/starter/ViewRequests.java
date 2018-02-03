@@ -99,6 +99,11 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
     public void updateLocation() {
 
         final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+
+        ParseUser.getCurrentUser().put("location", userLocation);
+        ParseUser.getCurrentUser().saveInBackground();
+
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Requests");
         query.whereNear("requesterLocation", userLocation);
 //        query.whereDoesNotExist("diverUsername");
@@ -223,7 +228,7 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
     protected void onPause() {
         super.onPause();
 
-        locationManager.removeUpdates(this);
+//        locationManager.removeUpdates(this);
 
     }
 
