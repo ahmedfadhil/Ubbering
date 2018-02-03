@@ -48,7 +48,7 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
     ArrayList<Float> latitudes;
     ArrayList<Float> longitudes;
 
-
+    Location location;
     ArrayAdapter arrayAdapter;
     LocationManager locationManager;
     String provider;
@@ -71,19 +71,21 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         locationManager.requestLocationUpdates(provider, 400, 1, this);
-        Location location = locationManager.getLastKnownLocation(provider);
+        final Location location = locationManager.getLastKnownLocation(provider);
         if (location != null) {
 
-            updateLocation(location);
+            updateLocation();
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(getApplicationContext(), vieRiderLocation.class);
-                i.putExtra("position", usernames.get(position));
+                i.putExtra("username", usernames.get(position));
                 i.putExtra("latitude", latitudes.get(position));
                 i.putExtra("longitude", longitudes.get(position));
+                i.putExtra("userLatitude", location.getLatitude());
+                i.putExtra("userLongitude", location.getLongitude());
                 startActivity(i);
 //                Log.i("MyApp", usernames.get(position) + latitudes.get(position).toString() + longitudes.get(position).toString());
 
@@ -94,7 +96,7 @@ public class ViewRequests extends AppCompatActivity implements LocationListener 
 
     }
 
-    public void updateLocation(final Location location) {
+    public void updateLocation() {
 
         final ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Requests");
