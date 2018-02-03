@@ -1,12 +1,10 @@
 package com.parse.starter;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
@@ -21,13 +19,14 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +35,12 @@ public class ViewRiderLocation extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     Intent i;
 
-    public void back(View view) {
+    public  void back(View view) {
+
         Intent intent = new Intent(getApplicationContext(), ViewRequests.class);
         startActivity(intent);
-    }
 
+    }
 
     public void acceptRequest(View view) {
 
@@ -66,7 +66,7 @@ public class ViewRiderLocation extends FragmentActivity {
 
                                     if (e == null) {
 
-                                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                        Intent intent = new Intent(Intent.ACTION_VIEW,
                                                 Uri.parse("http://maps.google.com/maps?daddr=" + i.getDoubleExtra("latitude", 0) + "," + i.getDoubleExtra("longitude", 0)));
                                         startActivity(intent);
 
@@ -74,6 +74,7 @@ public class ViewRiderLocation extends FragmentActivity {
 
                                 }
                             });
+
 
 
                         }
@@ -94,95 +95,42 @@ public class ViewRiderLocation extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rider_location);
 
-
         i = getIntent();
+
         setUpMapIfNeeded();
 
-    public void acceptRequest(View view) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Requests");
-        query.whereEqualTo("requesterUsername", i.getStringExtra("username"));
-//        query.whereDoesNotExist("diverUsername");
-//        query.setLimit(100);
-        query.findInBackground(new FindCallBack<ParseObject>() {
-            @SuppressLint("DefaultLocale")
+        RelativeLayout mapLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
+
+
+        mapLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void done(List<ParseObject> objects, ParseException e) {
+            public void onGlobalLayout() {
 
-                if (e == null) {
-                    if (objects.size() > 0) {
-                        for (ParseObject object : objects) {
-                            object.put("driverUsername", ParseUser.getCurrentUser().getUsername());
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                            object.saveInBackground(new SaveCallBack() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if (e == null) {
-                                        Intent intent = new Intent(Intent.ACTION_VIEW,
-                                                Uri.parse("http://maps.google.com/maps?daddr = " + i.getDoubleExtra("latitude", 0) + "," + i.getDoubleExtra("longitude", 0)));
-                                    }
-                                }
-                            });
+                ArrayList<Marker> markers = new ArrayList<Marker>();
 
-                        }
-                    }
+                markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0))).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Rider Location")));
+
+                markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("userLatitude", 0), i.getDoubleExtra("userLongitude", 0))).title("Your Location")));
+
+                for (Marker marker : markers) {
+                    builder.include(marker.getPosition());
                 }
+
+                LatLngBounds bounds = builder.build();
+
+                int padding = 100;
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+                mMap.animateCamera(cu);
+
+
 
             }
         });
+
     }
-
-    RelativeLayout mapLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        mapLayout.giveViewTreeObserver().
-
-    addOnGlobalLayoutListener(new ViewTreeObserver.onGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout () {
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            ArrayList<Marker> markers = new ArrayList<Marker>();
-            markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0))).icon(BitmapFactory.defaultMarker(BitmapDescriptionFactory.HUE_BLUE)).title("Rider Location")));
-            markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("userLatitude", 0), i.getDoubleExtra("userLongitude", 0))).title("Your Location")));
-            for (Marker marker : markers) {
-                builder.include(marker.getPosition);
-            }
-            LatLngBounds bounds = builder.build();
-
-            int padding = 100;
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-            mMap.animateCamera(cu);
-//
-
-        }
-    });
-//
-//        RelativeLayout mapLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-//
-//
-//        mapLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//
-//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//
-//                ArrayList<Marker> markers = new ArrayList<Marker>();
-//
-//                markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0))).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Rider Location")));
-//
-//                markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("userLatitude", 0), i.getDoubleExtra("userLongitude", 0))).title("Your Location")));
-//
-//                for (Marker marker : markers) {
-//                    builder.include(marker.getPosition());
-//                }
-//
-//                LatLngBounds bounds = builder.build();
-//
-//                int padding = 100;
-//                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-//
-//                mMap.animateCamera(cu);
-//
-
-
-}
 
     @Override
     protected void onResume() {
@@ -226,20 +174,7 @@ public class ViewRiderLocation extends FragmentActivity {
      */
     private void setUpMap() {
 
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        ArrayList<Marker> markers = new ArrayList<Marker>();
-        markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0))).title("Rider Location")));
-        markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(i.getDoubleExtra("userLatitude", 0), i.getDoubleExtra("userLongitude", 0))).title("Your Location")));
-        for (Marker marker : markers) {
-            builder.include(marker.getPosition);
-        }
-        LatLngBounds bounds = builder.build();
 
-        int padding = 10;
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.animateCamera(cu);
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()), 10));
-//        mMap.animateCamera(CameraUpdateFactory.newLatlngZoom(new LatLng(i.getDoubleExtra("latitude", 0), i.getDoubleExtra("longitude", 0), location.getLongitude()), 10));
 
 
     }

@@ -10,21 +10,17 @@ package com.parse.starter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Switch;
 
 import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -60,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
     }
 
     public void redirectUser() {
@@ -68,9 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
             Intent i = new Intent(getApplicationContext(), YourLocation.class);
             startActivity(i);
+
         } else {
+
             Intent i = new Intent(getApplicationContext(), ViewRequests.class);
             startActivity(i);
+
         }
 
     }
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ParseUser.getCurrentUser().put("riderOrDriver", "driver");
+        ParseUser.getCurrentUser().put("riderOrDriver", "rider");
 
         riderOrDriverSwitch = (Switch) findViewById(R.id.riderOrDriverSwitch);
 
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+
 
 
     }
